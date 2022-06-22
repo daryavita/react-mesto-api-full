@@ -32,11 +32,10 @@ const corsOptions = {
     'http://mesto.daryavita.nomoredomains.xyz',
   ],
   optionsSuccessStatus: 200,
-  credentials: true,
 };
 
-app.use('*', cors(corsOptions));
 app.use(helmet());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
