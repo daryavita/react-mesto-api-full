@@ -1,0 +1,11 @@
+.popup-open-card__image {
+    width: 100%;
+    max-height: 540px;
+}
+
+@media screen and (max-width: 690px) {
+    .popup-open-card__image {
+        width: 100%;
+        max-height: 299px;
+    }
+}

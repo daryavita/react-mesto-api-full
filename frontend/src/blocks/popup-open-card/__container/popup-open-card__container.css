@@ -1,0 +1,13 @@
+.popup-open-card__container {
+    max-width: 75vw;
+    max-height: 75vh;
+    position: relative;
+
+}
+
+/* @media screen and (max-width: 690px) {
+    .popup-open-card__container {
+        width: 282px;
+        min-height: 322px;
+    }
+} */

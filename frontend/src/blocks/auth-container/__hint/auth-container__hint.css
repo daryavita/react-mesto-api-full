@@ -1,0 +1,12 @@
+.auth-container__hint {
+    color: #fff;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 15px 0 0 0;
+    padding: 0;
+    display: block;
+}

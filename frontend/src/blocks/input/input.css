@@ -1,0 +1,17 @@
+.input{
+    font-family: inherit;
+    margin: 0;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    width: 358px;
+    padding: 0 0 13px 0;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media screen and (max-width: 690px) {
+    .input {
+        width: 238px;
+    }
+}

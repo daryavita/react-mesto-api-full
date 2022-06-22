@@ -1,0 +1,16 @@
+.popup__profile-info {
+    font-family: inherit;
+    margin: 54px 0 0 36px;
+    padding: 0;
+    width: 358px;
+    border: 0;
+    display: grid;
+    gap: 30px;
+}
+
+@media screen and (max-width: 690px) {
+    .popup__profile-info {
+        margin: 75px 0 0 22px;
+        width: 238px;
+    }
+}
