@@ -6,8 +6,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
-const helmet = require('helmet');
 const cors = require('cors');
+const helmet = require('helmet');
 const { validateURL, putError } = require('./middlewares/errors');
 const NotFoundError = require('./errors/Not-found-err');
 const { userRouter } = require('./routes/users');
@@ -28,8 +28,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://mesto.daryavita.nomoredomains.xyz',
     'http://mesto.daryavita.nomoredomains.xyz',
+    'https://mesto.daryavita.nomoredomains.xyz',
   ],
   optionsSuccessStatus: 200,
 };
