@@ -1,6 +1,5 @@
 class Api {
     constructor({ baseUrl, headers }) {
-        // this._headers = headers;
         this._baseUrl = baseUrl;
     }
 
@@ -103,9 +102,5 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: 'http://localhost:3001',
-    // headers: {
-    //     authorization: '946ba5b7-e5b2-4dad-b0a9-85a07c6c499d',
-    //     'Content-Type': 'application/json'
-    // }
+    baseUrl: 'api.mesto.daryavita.nomoredomains.xyz' || 'http://localhost:3001',
 });

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 
 const { PORT = 3001 } = process.env;
@@ -25,7 +26,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 });
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: [
+    'http://localhost:3000',
+    'https://mesto.daryavita.nomoredomains.xyz',
+  ],
   optionsSuccessStatus: 200,
 };
 

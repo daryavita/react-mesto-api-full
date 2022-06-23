@@ -2,8 +2,7 @@ import { useContext } from "react";
 import defaultAvatar from "../../images/defaultAvatar.webp";
 import Card from "../Card/Card";
 import {
-  CurrentUserContext,
-  CardDataContext,
+  CurrentUserContext
 } from "../../contexts/CurrentUserContext";
 
 function Main({
