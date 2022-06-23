@@ -1,5 +1,5 @@
 class Api {
-    constructor({ baseUrl, headers }) {
+    constructor({ baseUrl}) {
         this._baseUrl = baseUrl;
     }
 
@@ -102,5 +102,5 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: 'api.mesto.daryavita.nomoredomains.xyz' || 'http://localhost:3001',
+    baseUrl: 'api.mesto.daryavita.nomoredomains.xyz',
 });

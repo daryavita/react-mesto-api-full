@@ -1,4 +1,4 @@
-export const BASE_URL = "api.mesto.daryavita.nomoredomains.xyz" || "http://localhost:3001";
+export const BASE_URL = "api.mesto.daryavita.nomoredomains.xyz";
 
 const checkResponse = (response) => {
   if (response.ok) {
