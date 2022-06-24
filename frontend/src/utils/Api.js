@@ -102,5 +102,5 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: 'api.mesto.daryavita.nomoredomains.xyz',
+    baseUrl: "https://api.mesto.daryavita.nomoredomains.xyz",
 });

@@ -17,7 +17,7 @@ function Main({
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <div className="page__container">
+    <div>
       <main className="content">
         <section className="profile">
           <div className="profile__avatar-container">
