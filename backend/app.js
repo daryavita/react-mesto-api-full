@@ -29,6 +29,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://mesto.daryavita.nomoredomains.xyz',
+    'http://mesto.daryavita.nomoredomains.xyz',
   ],
   optionsSuccessStatus: 200,
   credentials: true,
@@ -39,6 +40,12 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post(
   '/signin',
