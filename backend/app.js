@@ -25,19 +25,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-// const corsOptions = {
-//   origin: [
-//     'http://localhost:3000',
-//     'http://mesto.daryavita.nomoredomains.xyz',
-//     'https://mesto.daryavita.nomoredomains.xyz',
-//   ],
-//   optionsSuccessStatus: 200,
-// };
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'http://mesto.daryavita.nomoredomains.xyz',
+    'https://mesto.daryavita.nomoredomains.xyz',
+  ],
+  optionsSuccessStatus: 200,
+};
 
-app.options('*', cors());
-
+app.use(cors(corsOptions));
 app.use(helmet());
-// app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
