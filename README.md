@@ -3,4 +3,6 @@
   
 Сайт можно посетить по ссылке: https://mesto.daryavita.nomoredomains.xyz
 
+Домен: mesto.daryavita.nomoredomains.xyz
+
 Публичный IP-адрес сервера: 51.250.79.95

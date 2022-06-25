@@ -72,9 +72,9 @@ app.post(
 app.use('/users', isAuthorized, userRouter);
 app.use('/cards', isAuthorized, cardRouter);
 
-app.use(errorLogger);
-
 app.use(isAuthorized, (req, res, next) => next(new NotFoundError('Такая страница не найдена')));
+
+app.use(errorLogger);
 
 app.use(errors());
 
