@@ -16,7 +16,7 @@ function Register({ handleRegister }) {
   return (
     <div className="auth-container">
       <div>
-        <h3 className="auth-container__title">Регистрация</h3>
+        <h1 className="auth-container__title">Регистрация</h1>
         <form
           className="popup__form"
           name="sign-up"

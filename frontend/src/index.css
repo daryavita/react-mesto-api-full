@@ -83,3 +83,7 @@ body {
 @import url(./blocks/auth-container/__title/auth-container__title.css);
 @import url(./blocks/auth-container/__button-submit/auth-container__button-submit.css);
 @import url(./blocks/auth-container/__hint/auth-container__hint.css);
+
+@import url(./blocks/checkbox/checkbox.css);
+@import url(./blocks/checkbox/__input/checkbox__input.css);
+@import url(./blocks/checkbox/__slider/checkbox__slider.css);

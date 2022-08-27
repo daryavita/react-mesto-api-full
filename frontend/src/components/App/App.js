@@ -18,6 +18,9 @@ import Register from "../Register/Register";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/auth";
+import Checkbox from "../Checkbox/Checkbox";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, GlobalStyles, lightTheme } from "../../utils/theme";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -29,6 +32,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [infoTooltip, setInfoTooltip] = useState({});
+  const [theme, setTheme] = useState("dark");
   const history = useHistory();
 
   useEffect(() => {
@@ -235,65 +239,73 @@ function App() {
     setLoggedIn(false);
   };
 
+  const switchTheme = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <CardDataContext.Provider value={cards}>
-        <Switch>
-          <Route path="/sign-in">
-            <Header />
-            <Login handleLogin={handleLogin} tokenCheck={tokenCheck} />
-          </Route>
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <CurrentUserContext.Provider value={currentUser}>
+        <CardDataContext.Provider value={cards}>
+          <GlobalStyles />
+          <Checkbox onChange={switchTheme} />
+          <Switch>
+            <Route path="/sign-in">
+              <Header theme={theme}/>
+              <Login handleLogin={handleLogin} tokenCheck={tokenCheck} />
+            </Route>
 
-          <Route path="/sign-up">
-            <Header />
-            <Register handleRegister={handleRegister} />
-          </Route>
+            <Route path="/sign-up">
+              <Header theme={theme}/>
+              <Register handleRegister={handleRegister} />
+            </Route>
 
-          <ProtectedRoute path="/" loggedIn={loggedIn}>
-            <Header handleSignOut={handleSignOut} userData={userData} />
-            <Main
-              onEditProfile={handleEditProfileClick}
-              onEditAvatar={handleEditAvatarClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />
-          </ProtectedRoute>
-        </Switch>
+            <ProtectedRoute path="/" loggedIn={loggedIn}>
+              <Header handleSignOut={handleSignOut} userData={userData} theme={theme}/>
+              <Main
+                onEditProfile={handleEditProfileClick}
+                onEditAvatar={handleEditAvatarClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                cards={cards}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+              />
+            </ProtectedRoute>
+          </Switch>
 
-        <Footer />
+          <Footer />
 
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
 
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
 
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
 
-        <PopupWithForm
-          title="Вы уверены?"
-          name="delete-card"
-          textButton="Да"
-        ></PopupWithForm>
+          <PopupWithForm
+            title="Вы уверены?"
+            name="delete-card"
+            textButton="Да"
+          ></PopupWithForm>
 
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-        <InfoTooltip data={infoTooltip} />
-      </CardDataContext.Provider>
-    </CurrentUserContext.Provider>
+          <InfoTooltip data={infoTooltip} />
+        </CardDataContext.Provider>
+      </CurrentUserContext.Provider>
+    </ThemeProvider>
   );
 }
 

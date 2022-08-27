@@ -1,15 +1,17 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import logoBlack from "../../images/logo-black.svg";
 import { Route, Switch } from "react-router-dom";
 
-function Header({ handleSignOut, userData }) {
+function Header({ handleSignOut, userData, theme }) {
   let { email } = userData || {};
+  let logoSrc = theme === 'dark' ? logo : logoBlack
 
   return (
     <header className="header">
-      <a href="#">
-        <img src={logo} alt="логотип" className="header__logo" />
-      </a>
+      <Link to="/">
+        <img src={logoSrc} alt="логотип" className="header__logo" />
+      </Link>
 
       <Switch>
         <Route exact path="/">

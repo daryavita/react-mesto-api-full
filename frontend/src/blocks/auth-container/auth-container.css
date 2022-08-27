@@ -1,8 +1,8 @@
 .auth-container {
     margin: 0;
-    background: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     display: flex;
+    height: 100%;
 }

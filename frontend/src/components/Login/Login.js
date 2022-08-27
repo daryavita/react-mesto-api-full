@@ -15,7 +15,7 @@ function Login({ handleLogin }) {
   return (
     <div className="auth-container">
       <div>
-        <h3 className="auth-container__title">Вход</h3>
+        <h1 className="auth-container__title">Вход</h1>
         <form className="popup__form" name="sign-in" onSubmit={handleSubmit}>
           <fieldset className="popup__profile-info">
             <Input
