@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -7,6 +11,10 @@ body {
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   background-color: #000;
+  height: 100%;
+}
+
+#root {
   height: 100%;
 }
 
