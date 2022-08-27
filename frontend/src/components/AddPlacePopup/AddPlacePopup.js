@@ -1,28 +1,24 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import Input from "../Input/Input";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
 function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
-  const [values, setValues] = useState({});
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    resetForm();
+  }, [onClose]);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onAddPlace({
       name: values.name,
       link: values.link,
     });
-  }
-
-  useEffect(() => {
-    setValues({});
-  }, [isOpen]);
+    resetForm();
+  };
 
   return (
     <PopupWithForm
@@ -32,41 +28,30 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
-      <div>
-        <input
-          value={values.name || ''}
-          onChange={handleChange}
-          type="text"
-          id="name-card-input"
-          name="name"
-          className="input popup__input-info_type_name-card"
-          placeholder="Название"
-          required
-          minLength="2"
-          maxLength="30"
-        />
-        <span
-          className="popup__error popup__error_visible"
-          id="name-card-input-error"
-        ></span>
-      </div>
-      <div>
-        <input
-          value={values.link || ''}
-          onChange={handleChange}
-          type="url"
-          id="link-card-input"
-          name="link"
-          className="input popup__input-info_type_link-card"
-          placeholder="Ссылка на картинку"
-          required
-        />
-        <span
-          className="popup__error popup__error_visible"
-          id="link-card-input-error"
-        ></span>
-      </div>
+      <Input
+        value={values.name || ""}
+        onChange={handleChange}
+        type="text"
+        name="name"
+        placeholder="Название"
+        required
+        minLength="2"
+        maxLength="30"
+        editForm={true}
+        errorMessage={errors.name}
+      />
+      <Input
+        value={values.link || ""}
+        onChange={handleChange}
+        type="url"
+        name="link"
+        placeholder="Ссылка на картинку"
+        required
+        editForm={true}
+        errorMessage={errors.link}
+      />
     </PopupWithForm>
   );
 }

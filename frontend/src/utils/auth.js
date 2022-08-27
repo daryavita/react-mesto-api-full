@@ -6,7 +6,8 @@ const checkResponse = (response) => {
   }
 
   return response.json().then((res) => {
-    throw res.message[0].messages[0].message;
+    console.log('res.message', res.message)
+    throw res.message;
   });
 };
 

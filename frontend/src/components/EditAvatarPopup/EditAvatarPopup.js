@@ -1,19 +1,23 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import Input from "../Input/Input";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const inputRef = useRef();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onUpdateAvatar({
-      avatar: inputRef.current.value,
-    });
-  }
+  const { values, handleChange, errors, isValid, resetForm } =
+    useFormWithValidation();
 
   useEffect(() => {
-    inputRef.current.value = "";
-  }, [isOpen]);
+    resetForm();
+  }, [onClose]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onUpdateAvatar({
+      avatar: values.avatar,
+    });
+    resetForm();
+  };
 
   return (
     <PopupWithForm
@@ -23,22 +27,18 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
-      <div>
-        <input
-          ref={inputRef}
-          type="url"
-          id="link-avatar-input"
-          name="avatar"
-          className="input popup__input-info_type_link-avatar"
-          placeholder="Ссылка на картинку"
-          required
-        />
-        <span
-          className="popup__error popup__error_visible"
-          id="link-avatar-input-error"
-        ></span>
-      </div>
+      <Input
+        type="url"
+        name="avatar"
+        placeholder="Ссылка на картинку"
+        required
+        onChange={handleChange}
+        value={values.avatar || ""}
+        editForm={true}
+        errorMessage={errors.avatar}
+      />
     </PopupWithForm>
   );
 }

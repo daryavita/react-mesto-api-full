@@ -16,8 +16,6 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import success from "../../images/success.svg";
-import error from "../../images/error.svg";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as auth from "../../utils/auth";
 
@@ -30,37 +28,35 @@ function App() {
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
-  const [successNotif, setSuccessNotif] = useState(false);
-  const [errorNotif, setErrorNotif] = useState(false);
+  const [infoTooltip, setInfoTooltip] = useState({});
   const history = useHistory();
 
   useEffect(() => {
-    if(loggedIn) {
+    if (loggedIn) {
       api
-      .getProfile()
-      .then((res) => {
-        setCurrentUser({
-          name: res.name,
-          about: res.about,
-          avatar: res.avatar,
-          id: res._id,
-        });
-      })
-      .catch((err) => console.log(`Ошибка ${err}`));
+        .getProfile()
+        .then((res) => {
+          setCurrentUser({
+            name: res.name,
+            about: res.about,
+            avatar: res.avatar,
+            id: res._id,
+          });
+        })
+        .catch((err) => console.log(`Ошибка ${err}`));
 
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch((err) => console.log(`Ошибка ${err}`));
+      api
+        .getInitialCards()
+        .then((res) => {
+          setCards(res);
+        })
+        .catch((err) => console.log(`Ошибка ${err}`));
     }
-
   }, [loggedIn]);
 
   useEffect(() => {
     tokenCheck();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -87,8 +83,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setSelectedCard({});
-    setSuccessNotif(false);
-    setErrorNotif(false);
+    setInfoTooltip({});
   };
 
   const handleCardClick = (card) => {
@@ -124,13 +119,13 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i === currentUser.id);
+    const isLiked = card.likes.some((i) => i === currentUser.id);
 
     const request = isLiked ? api.deleteLike(card._id) : api.addLike(card._id);
     request
       .then((res) => {
         setCards((state) =>
-           state.map((item) => (item._id === card._id ? res : item))
+          state.map((item) => (item._id === card._id ? res : item))
         );
       })
       .catch((err) => console.log(`Ошибка ${err}`));
@@ -172,30 +167,54 @@ function App() {
       .authorize(email, password)
       .then((data) => {
         if (!data.token) {
-          setErrorNotif(true);
+          setInfoTooltip({
+            title: "Произошла ошибка((",
+            name: "error",
+            isOpen: true,
+            onClose: closeAllPopups,
+          });
           return;
         }
         localStorage.setItem("jwt", data.token);
         tokenCheck();
         history.push("/");
       })
-      .catch((err) => setErrorNotif(true));
+      .catch((err) => {
+        setInfoTooltip({
+          title: err,
+          name: "error",
+          isOpen: true,
+          onClose: closeAllPopups,
+        });
+      });
   };
 
   const handleRegister = (email, password) => {
     return auth
       .register(email, password)
       .then((res) => {
-        setSuccessNotif(true);
+        setInfoTooltip({
+          title: "Вы успешно зарегистрировались!",
+          name: "success",
+          isOpen: true,
+          onClose: closeAllPopups,
+        });
         history.push("/sign-in");
       })
-      .catch((err) => setErrorNotif(true));
+      .catch((err) => {
+        setInfoTooltip({
+          title: err,
+          name: "error",
+          isOpen: true,
+          onClose: closeAllPopups,
+        });
+      });
   };
 
   const tokenCheck = () => {
     if (localStorage.getItem("jwt")) {
       let jwt = localStorage.getItem("jwt");
-      
+
       auth
         .getContent(jwt)
         .then((res) => {
@@ -272,20 +291,7 @@ function App() {
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-        <InfoTooltip
-          title="Вы успешно зарегистрировались!"
-          name="success"
-          img={success}
-          isOpen={successNotif}
-          onClose={closeAllPopups}
-        />
-        <InfoTooltip
-          title="Что-то пошло не так! Попробуйте еще раз."
-          name="error"
-          img={error}
-          isOpen={errorNotif}
-          onClose={closeAllPopups}
-        />
+        <InfoTooltip data={infoTooltip} />
       </CardDataContext.Provider>
     </CurrentUserContext.Provider>
   );
