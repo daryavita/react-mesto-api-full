@@ -1,4 +1,6 @@
-export const BASE_URL = "https://api.mesto.daryavita.nomoredomains.xyz";
+const { NODE_ENV, REACT_APP_API_URL_LOCAL, REACT_APP_API_URL_PROD } = process.env;
+
+export const BASE_URL = NODE_ENV  === 'production' ? REACT_APP_API_URL_PROD : REACT_APP_API_URL_LOCAL;
 
 const checkResponse = (response) => {
   if (response.ok) {

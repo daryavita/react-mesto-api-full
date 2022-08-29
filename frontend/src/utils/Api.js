@@ -1,3 +1,5 @@
+const { NODE_ENV, REACT_APP_API_URL_LOCAL, REACT_APP_API_URL_PROD } = process.env;
+
 class Api {
     constructor({ baseUrl}) {
         this._baseUrl = baseUrl;
@@ -102,5 +104,5 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: "https://api.mesto.daryavita.nomoredomains.xyz",
+    baseUrl: NODE_ENV  === 'production' ? REACT_APP_API_URL_PROD : REACT_APP_API_URL_LOCAL,
 });
