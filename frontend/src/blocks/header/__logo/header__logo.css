@@ -11,13 +11,13 @@
 
 @media screen and (max-width: 920px) {
     .header__logo {
-        padding: 28px 0 31.6px 36px;
+        /* padding: 28px 0 31.6px 36px; */
     }
 }
 
 @media screen and (max-width: 768px) {
     .header__logo {
-        padding: 28px 0 31.6px 27px;
+        /* padding: 28px 0 31.6px 27px; */
         max-width: 103.74px;
     }
 }

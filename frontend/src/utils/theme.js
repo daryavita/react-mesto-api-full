@@ -44,9 +44,10 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${(props) => props.theme.colorButton};
     color: ${(props) => props.theme.textColor};
    }
-   .input_theme_black {
+   .input_theme_auth {
     background: ${(props) => props.theme.colorInput};
     border-bottom: ${(props) => props.theme.borderBottom};
+    color: ${(props) => props.theme.textColor};
 
    }
    .checkbox {
@@ -60,9 +61,7 @@ export const GlobalStyles = createGlobalStyle`
     background-image: ${(props) => props.theme.imgEditBtn};
     border: ${(props) => props.theme.border};
    }
+   .card__image {
+    color: ${(props) => props.theme.headingColor};
+   }
   `;
-
-//   .input {
-//     background: ${(props) => props.theme.colorInput};
-//     border-bottom: ${(props) => props.theme.borderBottom};
-//    }

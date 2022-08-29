@@ -18,7 +18,7 @@ function Input({
         <input
         type={type}
         name={name}
-        className={`input ${editForm ? "" : "input_theme_black"}`}
+        className={`input ${editForm ? "" : "input_theme_auth"}`}
         required
         minLength={minLength}
         maxLength={maxLength}

@@ -28,7 +28,6 @@ body {
 @import url(./blocks/link/_type/link_type_dark.css);
 @import url(./blocks/button-hover/button-hover.css);
 @import url(./blocks/page/page.css);
-@import url(./blocks/page/__container/page__container.css);
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
 @import url(./blocks/header/__links/header__links.css);
@@ -67,7 +66,7 @@ body {
 @import url(./blocks/popup/__profile-info/popup__profile-info.css);
 @import url(./blocks/input/input.css);
 @import url(./blocks/input/_error/input_type_error.css);
-@import url(./blocks/input/_theme/input_theme_black.css);
+@import url(./blocks/input/_theme/input_theme_auth.css);
 @import url(./blocks/popup/__error/popup__error.css);
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(./blocks/popup/__submit/popup__submit.css);
