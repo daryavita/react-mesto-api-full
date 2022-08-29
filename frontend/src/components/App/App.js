@@ -94,33 +94,33 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleUpdateUser = (currentUser) => {
-    api
-      .editProfile(currentUser.name, currentUser.about)
-      .then((res) => {
-        setCurrentUser({
-          name: res.name,
-          about: res.about,
-          avatar: res.avatar,
-        });
-        closeAllPopups();
-      })
-      .catch((err) => console.log(`Ошибка ${err}`));
-  };
+  async function handleUpdateUser(currentUser) {
+    try {
+      const data = await api.editProfile(currentUser.name, currentUser.about);
+      setCurrentUser({
+        name: data.name,
+        about: data.about,
+        avatar: data.avatar,
+      });
+      closeAllPopups();
+    } catch (err) {
+      console.log(`Ошибка ${err}`);
+    }
+  }
 
-  const handleUpdateAvatar = (currentUser) => {
-    api
-      .editAvatar(currentUser.avatar)
-      .then((res) => {
-        setCurrentUser({
-          name: res.name,
-          about: res.about,
-          avatar: res.avatar,
-        });
-        closeAllPopups();
-      })
-      .catch((err) => console.log(`Ошибка ${err}`));
-  };
+  async function handleUpdateAvatar(currentUser) {
+    try {
+      const res = await api.editAvatar(currentUser.avatar);
+      setCurrentUser({
+        name: res.name,
+        about: res.about,
+        avatar: res.avatar,
+      });
+      closeAllPopups();
+    } catch (err) {
+      console.log(`Ошибка ${err}`);
+    }
+  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser.id);
@@ -251,17 +251,21 @@ function App() {
           <Checkbox onChange={switchTheme} />
           <Switch>
             <Route path="/sign-in">
-              <Header theme={theme}/>
+              <Header theme={theme} />
               <Login handleLogin={handleLogin} tokenCheck={tokenCheck} />
             </Route>
 
             <Route path="/sign-up">
-              <Header theme={theme}/>
+              <Header theme={theme} />
               <Register handleRegister={handleRegister} />
             </Route>
 
             <ProtectedRoute path="/" loggedIn={loggedIn}>
-              <Header handleSignOut={handleSignOut} userData={userData} theme={theme}/>
+              <Header
+                handleSignOut={handleSignOut}
+                userData={userData}
+                theme={theme}
+              />
               <Main
                 onEditProfile={handleEditProfileClick}
                 onEditAvatar={handleEditAvatarClick}
