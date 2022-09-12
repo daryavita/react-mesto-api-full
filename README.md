@@ -30,7 +30,7 @@
 
 ## Ссылки
   
-Сайт можно посетить по ссылке: https://mesto.daryavita.nomoredomains.xyz
+Сайт можно посетить по ссылке: https://mesto.daryavita.nomoredomains.xyz/sign-in
 
 Домен: mesto.daryavita.nomoredomains.xyz
 
